@@ -1,0 +1,60 @@
+:root {
+  color-scheme: light dark;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top left, #1f2937, #0f172a 40%);
+  min-height: 100vh;
+  color: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 64px;
+}
+
+#root {
+  width: min(960px, 100%);
+}
+
+.page {
+  display: grid;
+  gap: 20px;
+}
+
+header {
+  display: grid;
+  gap: 8px;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+h1 {
+  margin: 0;
+}
+
+.lede {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.card > div {
+  width: 100%;
+}

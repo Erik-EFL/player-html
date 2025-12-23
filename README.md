@@ -1,5 +1,13 @@
 # player-html
-um player html 5  para todas as finalidades de midia
+
+Um player MP3 HTML5 completo, acessível e pronto para ser reutilizado em qualquer projeto.
+
+## Principais recursos
+- Interface pronta com Shadow-like styling (CSS variables) e controles completos: play/pause, anterior/próxima, retroceder/avançar 10s.
+- Fila/playlist com destaque da faixa atual, modos **shuffle** e **repeat** (off/all/one).
+- Barra de progresso e volume com controles de teclado, atalhos globais e integração com **Media Session API** (mídia keys do sistema).
+- Persistência opcional de estado (faixa atual, tempo, volume, modos) no `localStorage`.
+- Acessibilidade: botões reais, `aria-label`/`aria-pressed`, região `aria-live`, foco visível e sliders com `aria-valuetext`.
 
 ## Configuração do Projeto
 
@@ -21,23 +29,74 @@ npm run build
 npm run dev
 ```
 
-## Estrutura
-
-```
-player-html/
-├── src/           # Código fonte TypeScript
-├── dist/          # Arquivos compilados
-├── rollup.config.js
-├── tsconfig.json
-└── package.json
-```
-
 ## Uso
 
 ```typescript
 import PlayerHTML from 'player-html';
 
-const player = new PlayerHTML('#my-video');
+const player = new PlayerHTML({
+  container: '#player',
+  tracks: [
+    { src: '/musicas/faixa-01.mp3', title: 'Faixa 01', artist: 'Artista X', cover: '/img/capa-01.png' },
+    { src: '/musicas/faixa-02.mp3', title: 'Faixa 02', artist: 'Artista Y' },
+  ],
+  startIndex: 0,
+  initialVolume: 0.8,
+  preload: 'metadata',
+  persistKey: 'player-html-demo',
+});
+
+// Métodos úteis
 player.play();
+player.pause();
+player.next();
+player.previous();
 player.setVolume(0.5);
 ```
+
+Crie um contêiner no HTML e o player será renderizado dentro dele:
+
+```html
+<div id="player"></div>
+```
+
+### Acessibilidade e atalhos
+- **Espaço**: play/pause
+- **N/P**: próxima/anterior
+- **J/L**: -10s / +10s
+- **←/→**: -5s / +5s
+- **M**: mute
+
+### Customização
+- Desative `injectStyles` para aplicar seus próprios estilos.
+- Use `keyboardShortcuts: false` se quiser controlar manualmente os atalhos.
+- Personalize a fila/controles via CSS usando os seletores `.mp3-player__*`.
+
+## Exemplos em React e Vue
+
+O repositório inclui dois apps Vite prontos para testar a biblioteca instalada via dependência local:
+
+- `examples/react-app`: demonstração com React 18 + TypeScript
+- `examples/vue-app`: demonstração com Vue 3 + TypeScript
+
+Ambos usam um alias em `vite.config.ts` apontando para `src/index.ts`, mantendo o fluxo de desenvolvimento rápido com a versão mais recente do player.
+
+### Como rodar os exemplos
+
+1. Instale as dependências do projeto na raiz (opcional, mas recomendado para ter o `node_modules` compartilhado em cache):
+   ```bash
+   npm install
+   ```
+2. Entre em um dos diretórios de exemplo e instale as dependências:
+   ```bash
+   cd examples/react-app
+   npm install
+   npm run dev
+   ```
+   ou
+   ```bash
+   cd examples/vue-app
+   npm install
+   npm run dev
+   ```
+3. Abra o endereço exibido no terminal (padrão `http://localhost:5173`) para ver o player funcionando dentro do framework escolhido.
